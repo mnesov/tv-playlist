@@ -7,12 +7,11 @@ export class Settings extends React.Component {
     this.state = {
       settings: props.settings
     }
-    this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange (e, {name, value}) {
     this.setState({
-      settings: Object.assign({}, this.state.settings, {[name]: value})
+      settings: {...this.state.settings, [name]: value}
     })
   }
 
@@ -29,7 +28,7 @@ export class Settings extends React.Component {
           label='Source URL'
           name='sourceUrl'
           value={this.state.settings.sourceUrl || ''}
-          onChange={this.handleChange}
+          onChange={::this.handleChange}
         />
       </Form.Group>
     </Form>

@@ -4,3 +4,4 @@ out
 .idea
 src/*.css
 src/*.css.map
+/dist/

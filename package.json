@@ -3,73 +3,44 @@
   "productName": "tv-playlist",
   "version": "1.0.0",
   "description": "My Electron application description",
-  "main": "src/index.js",
-  "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint --cache --color --ext .jsx,.js src"
-  },
   "keywords": [],
   "author": "mnesov",
   "license": "MIT",
-  "config": {
-    "forge": {
-      "make_targets": {
-        "win32": [
-          "squirrel"
-        ],
-        "darwin": [
-          "zip"
-        ],
-        "linux": [
-          "deb",
-          "rpm"
-        ]
-      },
-      "electronPackagerConfig": {
-        "packageManager": "npm"
-      },
-      "electronWinstallerConfig": {
-        "name": "my_new_project"
-      },
-      "electronInstallerDebian": {},
-      "electronInstallerRedhat": {},
-      "github_repository": {
-        "owner": "",
-        "name": ""
-      },
-      "windowsStoreConfig": {
-        "packageName": "",
-        "name": "mynewproject"
-      }
-    }
+  "scripts": {
+    "dev": "electron-webpack dev",
+    "compile": "electron-webpack",
+    "dist": "yarn compile && electron-builder",
+    "dist:dir": "yarn dist --dir -c.compression=store -c.mac.identity=null"
   },
   "dependencies": {
-    "electron-compile": "^6.4.2",
-    "electron-devtools-installer": "^2.2.3",
-    "electron-squirrel-startup": "^1.0.0",
     "ramda": "^0.25.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "react-hot-loader": "^4.0.1",
-    "semantic-ui-react": "^0.79.0"
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "semantic-ui-css": "^2.3.1",
+    "semantic-ui-react": "^0.79.1",
+    "source-map-support": "^0.5.4"
   },
   "devDependencies": {
-    "babel-plugin-transform-async-to-generator": "^6.24.1",
-    "babel-plugin-transform-es2015-classes": "^6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-react": "^6.24.1",
-    "electron-forge": "^5.1.1",
-    "electron-prebuilt-compile": "1.8.4",
+    "@babel/preset-react": "^7.0.0-beta.44",
+    "@babel/preset-stage-0": "^7.0.0-beta.44",
+    "electron": "1.8.4",
+    "electron-builder": "^20.8.1",
+    "electron-webpack": "^2.0.1",
+    "electron-webpack-eslint": "^2.1.0",
     "eslint": "^4.18.2",
     "eslint-config-standard": "^11.0.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-import": "^2.10.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
-    "eslint-plugin-react": "^7.7.0"
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
+    "react-hot-loader": "^4.0.1",
+    "webpack": "^4.5.0"
+  },
+  "resolutions": {
+    "webpack-sources": "^1.1.0"
   }
 }

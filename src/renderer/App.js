@@ -3,6 +3,7 @@ import {ipcRenderer} from 'electron'
 import {Tab} from 'semantic-ui-react'
 import {reject, append, ifElse, always, pick, unless, pipe, values} from 'ramda'
 
+import './App.less'
 import {CategoryView} from './CategoryView'
 import {ChannelList} from './ChannelList'
 import {Settings} from './Settings'
@@ -17,8 +18,6 @@ export class App extends React.Component {
       settings: storedState.settings || {}
     }
     this.state.settings.sourceUrl && this.getChannels(this.state.settings.sourceUrl)
-    this.setFavourite = this.setFavourite.bind(this)
-    this.saveSettings = this.saveSettings.bind(this)
   }
 
   saveSettings (settings) {
@@ -61,14 +60,14 @@ export class App extends React.Component {
   }
 
   render () {
-    const {setFavourite, saveSettings, state: {channels, favourite, settings}} = this
+    const {state: {channels, favourite, settings}} = this
     const panes = {
       favourite: {
         menuItem: 'Favourite',
         render: () => <ChannelList
           onlyFavourite
           channels={channels}
-          setFavourite={setFavourite}
+          setFavourite={::this.setFavourite}
           favourite={this.state.favourite}
         />
       },
@@ -76,7 +75,7 @@ export class App extends React.Component {
         menuItem: 'By category',
         render: () => <CategoryView
           channels={channels}
-          setFavourite={setFavourite}
+          setFavourite={::this.setFavourite}
           favourite={favourite}
         />
       },
@@ -84,7 +83,7 @@ export class App extends React.Component {
         menuItem: 'All channels',
         render: () => <ChannelList
           channels={channels}
-          setFavourite={setFavourite}
+          setFavourite={::this.setFavourite}
           favourite={favourite}
         />
       },
@@ -92,7 +91,7 @@ export class App extends React.Component {
         menuItem: 'Settings',
         render: () => <Settings
           settings={settings}
-          saveSettings={saveSettings}
+          saveSettings={::this.saveSettings}
         />
       }
     }
